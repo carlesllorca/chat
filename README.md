@@ -4,18 +4,18 @@ Chat se basa un chat mediante un cliente servidor con el que se pueden conectar 
 
 ##Aplicación del cliente
 ```java
-  package servidor;
+package servidor;
 import java.net.*;
 import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Application1 {
+public class Application {
 
-  public Application1() throws IOException {
+  public Application() throws IOException {
     Socket s = new Socket ("127.0.0.1",9090);
-    Frame frame = new lomakyChat ("Chat " + "127.0.0.1" + ":" + "9090",
+    Frame frame = new vistaCliente ("Chat " + "127.0.0.1" + ":" + "9090",
                     s.getInputStream (), s.getOutputStream ());    
     
 //    Frame frame = new lomakyChat();
@@ -44,9 +44,10 @@ public class Application1 {
     catch (Exception e) {
       e.printStackTrace();
     }
-    new Application1();
+    new Application();
   }
 }
+
 
 ```
 
@@ -61,7 +62,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class lomakyChat extends JFrame implements Runnable{
+public class vistaCliente extends JFrame implements Runnable{
   BorderLayout borderLayout1 = new BorderLayout();
   JMenuBar menuBar1 = new JMenuBar();
   JMenu menuFile = new JMenu();
@@ -88,8 +89,8 @@ public class lomakyChat extends JFrame implements Runnable{
   /**
    * Constructs a new instance.
    */
-  public lomakyChat(String title, InputStream i, OutputStream o) {
-    super("Lomaky Chat");
+  public vistaCliente(String title, InputStream i, OutputStream o) {
+    super("chat");
     this.i = new DataInputStream (new BufferedInputStream (i));
     this.o = new DataOutputStream (new BufferedOutputStream (o));
     try  {
@@ -223,7 +224,11 @@ public class lomakyChat extends JFrame implements Runnable{
   void fileExit_ActionPerformed(ActionEvent e) {
     System.exit(0);
   }
+
+
+
 }
+
 ```
 ##Servidor
 ```java 
